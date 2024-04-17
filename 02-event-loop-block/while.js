@@ -2,14 +2,14 @@ const fs = require('fs')
 
 let isRun = true
 
-setTimeout(() => isRun = false , 100 )
+setTimeout(() => isRun = false , 30 )
 
 process.nextTick(() => console.log('Next tick'))
 
 const setImmediatePromise = () => {
     return new Promise((resolve, reject) => {
-        // setImmediate(() => resolve())
-        resolve()
+        setImmediate(() => resolve())
+        // resolve()
     })
 }
 
