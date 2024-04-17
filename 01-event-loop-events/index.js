@@ -6,26 +6,36 @@ const timefix = () => {
     return performance.now().toFixed(2)
 }
 
-console.log('Program Start')
+const outputText = (text,) =>{
+    console.log(text,timefix())
+}
 
-fs.writeFile('./test/test.txt', 'Writing', () => console.log('Text written to File (test.txt)',timefix()))
+outputText('Program Start')
 
-Promise.resolve().then(() => console.log('Promise 1', timefix()))
+fs.writeFile('./test/test.txt', 'Writing', () => outputText('Writing text'))
 
-process.nextTick(() => console.log('Next tick 1', timefix()))
+Promise.resolve().then(() => outputText('Promise 1'))
 
-setImmediate(() => console.log('Immediate 1', timefix()))
+process.nextTick(() => outputText('Next tick 1'))
 
-setTimeout(() => console.log('timeout 1', timefix()), 0)
-setTimeout(() => console.log('timeout 2', timefix()), 10)
+setImmediate(() => outputText('Immediate 1'))
+
+setTimeout(() => outputText('timeout 1'), 0)
+setTimeout(() => outputText('timeout 2'), 10)
 setTimeout(() => {
-    process.nextTick(() => console.log('Next tick 2', timefix()))
-    console.log('timeout 3', timefix())
+    process.nextTick(() => outputText('Next tick 2'))
+    outputText('timeout 3')
+}, 50)
+
+let intervalCount = 0
+const intervalId = setInterval(() => {
+    outputText(`Interval ${intervalCount += 1}`)
+    if (intervalCount === 3) clearInterval(intervalId)
 }, 100)
 
 dns.lookup('localhost', (err, address, family) => {
     console.log('DNS 1', address, timefix())
-    Promise.resolve().then(() => console.log('Promise 2', timefix()))
+    Promise.resolve().then(() => outputText('Promise 2'))
 })
 
-console.log('Program End')
+outputText('Program End')
