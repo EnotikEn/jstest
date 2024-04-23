@@ -39,3 +39,5 @@ dns.lookup('localhost', (err, address, family) => {
 })
 
 outputText('Program End')
+
+// module.exports = timefix()
