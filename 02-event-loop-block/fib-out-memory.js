@@ -1,17 +1,31 @@
 // const timefix = require('./index')
-const fs = require('fs')
+const fs = require('fs');
+
+const cache = new Map();
 
 const fib = (n) => {
     return new Promise((resolve, reject) => {
-            if (n === 0 || n === 1 ){
-                return n
-            }
-    
-    return fib(n-1) + fib(n-2)
-    })  
-}
-const varNumb = 40
+        if (n === 0 || n === 1) {
+            return resolve(n);
+        }
 
-console.log(fib(varNumb))
+        if (cache.has(n)) {
+            return resolve(cache.get(n));
+        }
 
-setTimeout(() => console.log('Time Over'), 20)
+        setImmediate(() =>
+            fib(n - 1).then((fib1) =>
+                fib(n - 2).then((fib2) => {
+                    cache.set(n, fib1 + fib2);
+                    resolve(fib1 + fib2);
+                })
+            )
+        );
+    });
+};
+
+const varNumb = 102;
+
+fib(varNumb).then((res) => console.log(res));
+
+setTimeout(() => console.log('Time Over'), 0);

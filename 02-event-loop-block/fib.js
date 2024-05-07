@@ -1,16 +1,15 @@
 // const timefix = require('./index')
-const fs = require('fs')
+const fs = require('fs');
 
 const fib = (n) => {
-    
-    if (n === 0 || n === 1 ){
-        return n
+    if (n === 0 || n === 1) {
+        return n;
     }
-    return fib(n-1) + fib(n-2)
-}
+    return fib(n - 1) + fib(n - 2);
+};
 
-const varNumb = 40
+const varNumb = 40;
 
-console.log(fib(varNumb))
+console.log(fib(varNumb));
 
-setTimeout(() => console.log('Time Over'), 20)
+setTimeout(() => console.log('Time Over'), 20);
