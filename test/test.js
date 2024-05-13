@@ -130,3 +130,25 @@ console.table(secondUser);
 // console.log(module.exports);
 
 // console.log(exports === module.exports);
+
+//export
+
+//const URL = 'https://hello'
+//const IP = '10.1.7.28'
+
+// module.exports.URL = URL;
+// exports.IP = IP;
+
+//import
+
+//const {URL, IP} = require('./path_js_file')
+
+//export 1 variable
+
+//module.exports = () => {
+//     console.log('Hello World')
+// }
+
+//or
+
+//module.exports = URL
